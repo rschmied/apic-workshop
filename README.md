@@ -18,8 +18,20 @@ This is done via a few different approaches
 - APIC Cisco APIC Python SDK Documentation: <https://apic:8888/cobra/index.html>
 - APIC Management Information Model Reference: <https://apic:8888/doc/html/>
 - APIC Cobra SDK Download: <https://apic:8888/cobra/_downloads/>
+- ACI Dev Community <https://acidev.cisco.com>
 
+### Tools
+
+*Tunneling tools* allows you to easily share a web service on your local development machine without messing with DNS and firewall settings. They can also be used to talk to use the tool as a 'MITM' which relays (and inspects) the traffic to the destination (a controller, for example)
+
+- <http://localtunnel.me/>
+- <https://ngrok.com/>
+
+*Others*
+
+- curl <https://curl.haxx.se/>
+- jq is a lightweight and flexible command-line JSON processor <https://stedolan.github.io/jq/>
 
 ### Disclaimer
 
-The examples and code in this presentation are for **Learning and Educational purposes**.The samples were created with the **goals of clarity and ease of understanding**.If you are writing code for a real application, you would write the code in a more efficient and structured style.
+The examples and code in the presentation and this repository are for **Learning and Educational purposes**.The samples were created with the **goals of clarity and ease of understanding**.If you are writing code for a real application, you would write the code in a more efficient and structured style.
