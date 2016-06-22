@@ -1,31 +1,29 @@
 #!/usr/bin/env python
 
-import logging, json
+import requests
 
-from cobra.mit.access import MoDirectory
-from cobra.mit.session import LoginSession
+requests.packages.urllib3.disable_warnings()
 
+url = 'https://apic:8888/api/aaaLogin.json'
 
-# uncomment the below to get more verbose output
-# for debugging
+# this is a JSON string:
+payload = '{ "aaaUser": {"attributes": {"pwd": "1vtG@lw@y", "name": "admin" }}}'
+
+# this is a Python dictionary object:
+headers = { 'content-type': "application/json" }
+
+""" note the different quotes
+>>> print(payload)
+{'aaaUser': {'attributes': {'pwd': '1vtG@lw@y', 'name': 'admin'}}}
+>>> json.dumps(payload)
+'{"aaaUser": {"attributes": {"pwd": "1vtG@lw@y", "name": "admin"}}}'
 """
-import httplib as http_client
-http_client.HTTPConnection.debuglevel = 1
-logging.basicConfig()
-logging.getLogger().setLevel(logging.DEBUG)
-requests_log = logging.getLogger("requests.packages.urllib3")
-requests_log.setLevel(logging.DEBUG)
-requests_log.propagate = True
-"""
 
-session = LoginSession('https://apic:8888', 'admin', '1vtG@lw@y')
-moDir = MoDirectory(session)
-moDir.login()
-tenant1Mo = moDir.lookupByClass("dhcpClient")
+response = requests.post(url, data=payload, headers=headers)
+token = response.cookies.get('APIC-cookie')
 
-for c in tenant1Mo:
-	print(c.dn, c.model, c.name, c.ip)
-
-moDir.logout()
+url = 'https://apic:8888/api/node/class/dhcpClient.json'
+response = requests.get(url, cookies={'APIC-cookie': token})
+print(response.text)
 
 
