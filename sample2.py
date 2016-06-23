@@ -32,4 +32,7 @@ url = 'https://apic:8888/api/node/class/dhcpClient.json'
 response = requests.get(url, cookies={'APIC-cookie': token})
 print(response.text)
 
-
+# Alternative approach, using all cookies:
+# cookies = dict(response.cookies)
+# response = requests.get(url, cookies=cookies)
+#
